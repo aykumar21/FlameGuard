@@ -1,5 +1,7 @@
 # FlameGuard
 
+Live app: https://flameguard-gray.vercel.app
+
 Interactive fire-safety intelligence for the NASA Space Apps challenge **Flame in Freefall**.
 
 FlameGuard ranks NASA’s public microgravity combustion record against the cabin you are actually designing. The scientific point is narrow and uncomfortable: for some materials, lunar or Martian gravity is a worse flammability case than either Earth or free fall, and a large fire at exploration-atmosphere oxygen has been flown only in microgravity.
