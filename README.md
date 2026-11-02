@@ -66,7 +66,7 @@ The atlas score is gravity match, plus distance from the cabin atmosphere to the
 
 Ember retrieves from that ranked corpus by token overlap, a small synonym list, and intent patterns (limits, detection, suppression, spread, scale, the gap, and which flight). A question with no lexical overlap returns a thin confidence instead of a nearest-neighbor guess. Changing the mission rewrites an answer that is already on screen. Every number in the answer is either a cited measurement or one of the screening rules above.
 
-## What to show a judge
+## Demo path
 
 1. Open **Lunar surface** with Nomex. The headline is the Table I lunar ULOI\*, 13.0 points below the 34% cabin, with the 14.7 psia versus 8.2 psia caveat.
 2. Open **Same witness, six cabins**. ISS air is the only Guarded Nomex case. Exploration air is above the published limit in every gravity. The lowest overrun and the highest index are not the same mission.
