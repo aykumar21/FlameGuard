@@ -37,8 +37,8 @@ export function Shell({ children }: { children: ReactNode }) {
         </nav>
       </header>
       <p className="honesty">
-        Measured numbers are cited. Screening math is labeled. This compares published results. It does not certify a
-        material or a vehicle.
+        Measured numbers are cited. Screening math is labeled. Ember ranks this record on the page and does not call an
+        outside model. This compares published results. It does not certify a material or a vehicle.
       </p>
       <main>{children}</main>
     </div>

@@ -1,4 +1,5 @@
 import type { Finding } from "../data/types";
+import { findings } from "../data/corpus";
 import { classify, rankFindings, rankInvestigations, type Intent } from "./rank";
 import type { Assessment } from "./model";
 import {
@@ -26,8 +27,8 @@ function evidenceFor(query: string, a: Assessment, ids: string[]): Finding[] {
   const ranked = rankFindings(query, a);
   const picked: Finding[] = [];
   for (const id of ids) {
-    const row = ranked.find((item) => item.finding.id === id);
-    if (row) picked.push(row.finding);
+    const row = findings.find((item) => item.id === id);
+    if (row && !picked.some((item) => item.id === row.id)) picked.push(row);
   }
   for (const row of ranked) {
     if (picked.length >= 4) break;
@@ -119,8 +120,22 @@ export function interpret(query: string, a: Assessment): Answer {
           title: "The flame you cannot see",
           body: "FLEX cool flames continued after radiative extinction of the visible flame. Near-limit hot flames are often pale blue. Detection has to include a gas channel, not only a particle channel and a camera.",
         },
+        ...(intent === "detect"
+          ? [
+              {
+                title: "The particle SAME measured",
+                body: "Most average SAME smoke sizes were between 200 and 400 nm. With the fan off, particles were 2 to 3 times larger than at 8 cm/s. Ionization and light scattering do not see the same smoke, and a detector tuned on Earth is reading a different aerosol.",
+              },
+            ]
+          : []),
       ],
-      evidence: evidenceFor(trimmed, a, ["saffire6-alarm", "saffire6-toxic", "smoke-path", "cool-flame", "cool-products", "pale-flames"]),
+      evidence: evidenceFor(
+        trimmed,
+        a,
+        intent === "cool"
+          ? ["cool-flame", "cool-products", "pale-flames", "saffire6-alarm"]
+          : ["saffire6-alarm", "saffire6-toxic", "same-size", "smoke-path"],
+      ),
       gaps,
       confidence: intent === "cool" ? "bounded" : "high",
       confidenceWhy:

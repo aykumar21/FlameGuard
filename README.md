@@ -66,13 +66,34 @@ The atlas score is gravity match, plus distance from the cabin atmosphere to the
 
 Ember retrieves from that ranked corpus by token overlap, a small synonym list, and intent patterns (limits, detection, suppression, spread, scale, the gap, and which flight). A question with no lexical overlap returns a thin confidence instead of a nearest-neighbor guess. Changing the mission rewrites an answer that is already on screen. Every number in the answer is either a cited measurement or one of the screening rules above.
 
+## What the challenge asks
+
+The 2026 challenge, [Flame in Freefall](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/), asks for an interactive dashboard that summarizes, ranks, and interprets NASA’s microgravity combustion record so it can inform fire safety for the Moon and Mars. FlameGuard is that dashboard. One cabin is held fixed, and four readings of it stay in agreement:
+
+| Reading | Where | Open it |
+| --- | --- | --- |
+| Summarize the cabin against a published limit | Mission | https://flameguard-gray.vercel.app/#view=mission&mission=lunar&witness=nomex |
+| Rank the investigations for that cabin | Atlas | https://flameguard-gray.vercel.app/#view=atlas&mission=lunar&witness=nomex |
+| Interpret a question from cited rows only | Ember | https://flameguard-gray.vercel.app/#view=ember&mission=lunar&witness=nomex |
+| Hand the same state to someone else | Brief | https://flameguard-gray.vercel.app/#view=brief&mission=lunar&witness=nomex |
+
+The investigations the challenge names are in the atlas: BASS, Saffire I–VI, SAME, FLEX, and ACME’s Burning Rate Emulator. The Moon and Mars comparison uses the only published table that puts the same materials at lunar, Martian, forced-flow microgravity, and 1 g (Olson & Ferkul 2012, Table I). The still-empty cell, a large fire at exploration oxygen and lunar or Martian gravity, is labeled as empty. FM2 is ranked as a planned payload, not as a finished result.
+
+A link restores the view, the mission, and the witness. A preset link ignores an older browser session. Adjusting a slider adds those values to the link.
+
+## Use of SI
+
+Ember is the interpreter in the product. It does not send the cabin or the question to an outside language model. It ranks investigations by gravity match, atmosphere distance, and topic overlap, then writes the answer from the encoded findings. A number in an answer is either a cited measurement or one of the screening rules in `src/lib/model.ts`.
+
+The dashboard was written with Cursor, an SI coding assistant. Cursor drafted the interface and the retrieval code. Flight numbers were kept only when they appear in the cited paper or NASA page. The assistant did not supply a limit, a spread rate, or a score weight that is not written in `src/data/` and `src/lib/model.ts`.
+
 ## Demo path
 
-1. Open **Lunar surface** with Nomex. The headline is the Table I lunar ULOI\*, 13.0 points below the 34% cabin, with the 14.7 psia versus 8.2 psia caveat.
+1. Open [Lunar surface with Nomex](https://flameguard-gray.vercel.app/#view=mission&mission=lunar&witness=nomex). The headline is the Table I lunar ULOI\*, 13.0 points below the 34% cabin, with the 14.7 psia versus 8.2 psia caveat. The callout under it names the gravity where that witness’s published ULOI\* is lowest.
 2. Open **Same witness, six cabins**. ISS air is the only Guarded Nomex case. Exploration air is above the published limit in every gravity. The lowest overrun and the highest index are not the same mission.
-3. Switch the witness to **Mylar**. The lunar mean limit is 5.75 points below the 1 g mean, and the lunar overrun at 34% O₂ is larger than the microgravity exploration overrun.
-4. Ask Ember whether a Test 1 pass keeps a material safe on the Moon. The answer should cite the partial-g table and refuse to treat 1 g as the worst case.
-5. **Brief** prints the same state: limit, detection, suppression, spread, the open gap, and the method.
+3. Switch the witness to [Mylar](https://flameguard-gray.vercel.app/#view=mission&mission=lunar&witness=mylar). The lunar mean limit is 5.75 points below the 1 g mean, and the lunar overrun at 34% O₂ is larger than the microgravity exploration overrun.
+4. Ask Ember whether a Test 1 pass keeps a material safe on the Moon. The answer should cite the partial-g table and refuse to treat 1 g as the worst case. Start from [Ember on the lunar Nomex cabin](https://flameguard-gray.vercel.app/#view=ember&mission=lunar&witness=nomex).
+5. [Brief](https://flameguard-gray.vercel.app/#view=brief&mission=lunar&witness=nomex) prints the same state: limit, the 1 g gap, detection, suppression, spread, the open cell, and the method.
 
 ## Corpus
 
@@ -82,8 +103,18 @@ Cited in the atlas, not recomputed:
 - Saffire I–V concurrent spread rows, Combustion and Flame, DOI 10.1016/j.combustflame.2022.112559, Table 1. The Saffire-I anchor used by the ratio is 0.18 cm/s.
 - Saffire-VI atmospheres, heat release, CO/CO₂, and the 1 mg/m³ smoke threshold at 981 s, NTRS 20240002981. The Nomex swatch that did not ignite is not entered as a limit.
 - Cool flames, Nayagam et al., Combustion and Flame, DOI 10.1016/j.combustflame.2012.07.012. The detector implication (CO and formaldehyde, little soot) is marked as interpretation.
+- SAME particle sizes, NTRS 20130000422. Most averages 200–400 nm; zero-flow particles 2 to 3 times the 8 cm/s case. Flight description and the 30-sample list: NASA SAME fact sheet. PSI-102 and PSI-101.
+- ACME Burning Rate Emulator, NASA “Studying Combustion and Fire Safety”: 59 ISS burn tests of gaseous flames standing in for solids and liquids. The 49 drop-tower tests that did not reach steady state are Markan et al., Combustion and Flame 2018. Neither number is a material limit.
 - Detector placement and the partial-g gap, OCHMO-TB-008.
 - FM2, NTRS 20240015307. Planned lunar payload: a downward SIBAL burn in lunar air where the same downward burn extinguishes at 1 g.
+
+## References for the submission form
+
+NASA and partner sources are the corpus list above, plus:
+
+- NASA-STD-6001 Test 1, as discussed in Olson & Ferkul 2012. The app does not reprint the standard.
+- Physical Sciences Informatics: Saffire-I PSI-98, Saffire-III PSI-100, SAME PSI-102, SAME-R PSI-101.
+- Interface code: React, Vite, TypeScript. Fonts: Fraunces, Outfit, and IBM Plex Mono, via Fontsource.
 
 ## Team
 

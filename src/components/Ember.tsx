@@ -12,8 +12,10 @@ export function Ember() {
         <p className="eyebrow">Ember · grounded interpreter</p>
         <h1>It ranks the record against this cabin, then writes only from those rows.</h1>
         <p className="dek">
-          No model call, no invented measurement. {store.assessment.witness.short} at {store.assessment.mission.name} is
-          the case on the desk. Change the mission and a question you already asked is rewritten.
+          Ember is the interpreter. It retrieves cited rows for this cabin and writes only from those rows. It does not
+          call an outside language model, so a number in the answer is a cited measurement or a labeled screening rule.{" "}
+          {store.assessment.witness.short} at {store.assessment.mission.name} is the case on the desk. Change the mission
+          and a question you already asked is rewritten.
         </p>
       </header>
       <form

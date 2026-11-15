@@ -92,6 +92,27 @@ export function gapLead(a: Assessment): string {
   return "Microgravity vehicle fires and 1 g Test 1 are the well-populated cells. Partial gravity is the thin one.";
 }
 
+export function witnessWorstLead(witness: { short: string; points: { regime: string; uloi: number; deltaVsEarth: number }[] }): string {
+  const earth = witness.points.find((point) => point.regime === "earth");
+  const micro = witness.points.find((point) => point.regime === "micro");
+  const worst = witness.points.reduce((low, point) => (point.uloi < low.uloi ? point : low));
+  if (!earth || !micro) return "";
+  const place =
+    worst.regime === "lunar"
+      ? "lunar gravity"
+      : worst.regime === "mars"
+        ? "Martian gravity"
+        : worst.regime === "micro"
+          ? "forced-flow microgravity"
+          : "1 g";
+  const shift = `${worst.deltaVsEarth > 0 ? "+" : ""}${worst.deltaVsEarth.toFixed(2)}`;
+  const microNote =
+    micro.uloi > earth.uloi
+      ? ` Forced-flow microgravity is not that row: its ULOI* is ${micro.uloi.toFixed(1)}%, above the 1 g value.`
+      : ` Forced-flow microgravity is ${micro.uloi.toFixed(1)}%, still not as low as the partial-gravity point.`;
+  return `${witness.short}'s lowest published ULOI* is at ${place}: ${worst.uloi.toFixed(1)}%. The published mean-limit shift there is ${shift} versus 1 g, where ULOI is ${earth.uloi.toFixed(1)}%.${worst.regime === "earth" ? "" : microNote} A 1 g Test 1 result does not answer that row.`;
+}
+
 export function splitLead(limitName: string, indexName: string): string | null {
   if (limitName === indexName) return null;
   return `The lowest published overrun and the highest exposure index are different missions (${limitName} versus ${indexName}). A lower oxygen limit and a harder detection problem are not the same score.`;
@@ -118,6 +139,7 @@ export function briefSections(input: {
       paragraphs: [
         `${a.mission.name} · ${a.mission.place}. Witness material ${a.witness.name}.`,
         `${points(a.oxygenPct)}% oxygen at ${points(a.pressurePsia)} psia (${points(a.pressureKpa)} kPa), forced flow ${points(a.flowCms)} cm/s, gravity ${a.gravityG.toFixed(3)} g. ${partialPressureLead(a)}`,
+        witnessWorstLead(a.witness),
         a.mission.summary,
       ],
     },

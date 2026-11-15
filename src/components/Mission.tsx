@@ -10,6 +10,7 @@ import {
   pressureLead,
   splitLead,
   spreadLead,
+  witnessWorstLead,
   suppressionLead,
 } from "../lib/narrative";
 import { assessMission, presetBoard } from "../lib/model";
@@ -133,6 +134,13 @@ export function Mission() {
             </div>
           </div>
           <Flame gravity={store.gravityG} oxygen={store.oxygenPct} scenario={store.scenario} flow={store.flowCms} />
+        </section>
+
+        <section className="panel callout">
+          <header className="panel-h">
+            <h2>The 1 g row is not the worst published case</h2>
+            <p>{witnessWorstLead(a.witness)}</p>
+          </header>
         </section>
 
         <section className="panel">

@@ -47,7 +47,8 @@ function gravityPart(inv: Investigation, g: number): { points: number; reason: s
 
 function atmospherePart(inv: Investigation, oxygenPct: number, pressureKpa: number): { points: number; reason: string } {
   if (inv.atmospheres.length === 0) {
-    return { points: 8, reason: "Operational brief, not a single test atmosphere" };
+    if (inv.id === "ochmo") return { points: 8, reason: "Operational brief, not a single test atmosphere" };
+    return { points: 8, reason: "No single test atmosphere is encoded for this investigation" };
   }
   let best = Infinity;
   let bestAir = inv.atmospheres[0];
