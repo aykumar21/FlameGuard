@@ -120,4 +120,8 @@ NASA and partner sources are the corpus list above, plus:
 
 ## Team
 
-FlameGuard, National Chung Cheng University (CCU). Independent Space Apps project. Not a NASA product and not a flight certification.
+- [Naisha Eshwar Shelke](https://github.com/Naishashelke)
+- [Chandana Virupaksha](https://github.com/chandu1824)
+- [Ayush Kumar](https://github.com/aykumar21)
+
+National Chung Cheng University (CCU). Independent Space Apps project. Not a NASA product and not a flight certification.
