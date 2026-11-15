@@ -2,6 +2,8 @@
 
 Live app: https://flameguard-gray.vercel.app
 
+Demonstration, 7 slides: https://flameguard-gray.vercel.app/FlameGuard-demo.pdf
+
 FlameGuard is a local, cited interpreter of NASA’s public microgravity combustion record for the Space Apps challenge **Flame in Freefall**. It does not call an external language model, and it does not certify a material or a vehicle.
 
 The comparison it is built to make: NASA-STD-6001 Test 1 at 1 g is not the worst published case for every material. In Olson & Ferkul (AIAA 2012-3492, Table I), the upward limiting oxygen index of some witnesses is lower at lunar (0.166 g) or Martian (0.38 g) gravity than at either 1 g or forced-flow 0 g. A large fire near the exploration atmosphere, 8.2 psia and 34% O₂, has been flown in microgravity (Saffire-VI) and has not been flown at partial gravity and vehicle scale. That empty cell is what the lunar and Martian presets are scoring.

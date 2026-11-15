@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>FlameGuard — NASA Space Apps 2026</title>
+<style>
+  @page { size: 13.333in 7.5in; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #090a0c; color: #f4efe6; }
+  body { font-family: "Segoe UI", sans-serif; }
+  .slide {
+    width: 13.333in;
+    height: 7.5in;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(9in 4.2in at 92% -10%, rgba(255, 90, 31, 0.18), transparent 60%),
+      #090a0c;
+    page-break-after: always;
+    break-after: page;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .slide:last-child { page-break-after: auto; break-after: auto; }
+  .pad { position: absolute; inset: 0.52in 0.62in 0.48in; display: flex; flex-direction: column; }
+  .kicker {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ff5a1f;
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 0.96;
+    margin: 0;
+  }
+  .foot {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    color: #8d867c;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .rule { height: 1px; background: rgba(243, 236, 224, 0.16); margin: 18px 0 0; }
+
+  /* title */
+  .title-wrap { margin-top: 1.15in; }
+  .title-wrap h1 { font-size: 108px; }
+  .dek { margin: 18px 0 0; font-size: 28px; color: #b1a89c; max-width: 16in; }
+  .meta {
+    display: flex;
+    gap: 28px;
+    margin-top: 36px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px;
+    color: #f4efe6;
+  }
+  .meta span { color: #8d867c; display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+  .mark {
+    position: absolute;
+    top: 0.52in;
+    right: 0.62in;
+    width: 42px;
+    height: 52px;
+    background: radial-gradient(circle at 50% 70%, #ffe1b0, #ff5a1f 46%, transparent 72%);
+    clip-path: polygon(50% 0, 80% 38%, 68% 38%, 86% 78%, 50% 100%, 14% 78%, 32% 38%, 20% 38%);
+  }
+
+  /* problem */
+  .problem h1 { font-size: 64px; max-width: 11in; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+  .card {
+    border: 1px solid rgba(243, 236, 224, 0.16);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 16px 18px 14px;
+  }
+  .card strong {
+    display: block;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #f0b429;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .card p { margin: 0; font-size: 18px; line-height: 1.35; color: #f4efe6; }
+
+  /* solution */
+  .four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
+  .four article {
+    border-top: 2px solid #ff5a1f;
+    background: #111318;
+    border-radius: 0 0 16px 16px;
+    padding: 18px 16px 16px;
+    min-height: 3.35in;
+  }
+  .four em {
+    font-family: Consolas, "Courier New", monospace;
+    font-style: normal;
+    color: #ff5a1f;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+  }
+  .four h2 {
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin: 10px 0 8px;
+  }
+  .four p { margin: 0; color: #b1a89c; font-size: 16px; line-height: 1.4; }
+  .note { margin: 22px 0 0; font-size: 18px; color: #f4efe6; }
+
+  /* data */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+  .cols section {
+    background: #111318;
+    border: 1px solid rgba(243, 236, 224, 0.12);
+    border-radius: 16px;
+    padding: 20px 22px;
+  }
+  .cols h2 {
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .cols li { margin: 0 0 8px; font-size: 16px; line-height: 1.35; color: #f4efe6; }
+  .cols ul { margin: 0; padding-left: 18px; }
+  .banner {
+    margin-top: 16px;
+    border: 1px solid rgba(240, 180, 41, 0.45);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: #f4efe6;
+    font-size: 18px;
+  }
+  .banner b { color: #f0b429; font-weight: 600; }
+
+  /* result */
+  .hero-num { display: flex; align-items: flex-end; gap: 22px; margin-top: 8px; }
+  .hero-num strong {
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 92px;
+    font-weight: 500;
+    line-height: 0.85;
+    color: #ff5a1f;
+  }
+  .hero-num p { margin: 0 0 8px; font-size: 22px; max-width: 8.2in; line-height: 1.3; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+  .trio div {
+    background: #111318;
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(243, 236, 224, 0.12);
+  }
+  .trio b {
+    display: block;
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 28px;
+    font-weight: 500;
+  }
+  .trio span { display: block; margin-top: 4px; color: #b1a89c; font-size: 15px; line-height: 1.35; }
+  .split-line { margin: 16px 0 8px; font-size: 18px; color: #f4efe6; }
+  table.cabins { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 16px; }
+  table.cabins th {
+    text-align: left;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8d867c;
+    font-weight: 500;
+    padding: 0 10px 8px;
+  }
+  table.cabins td { padding: 7px 10px; border-top: 1px solid rgba(243, 236, 224, 0.12); }
+  table.cabins tr.loud td { color: #ff5a1f; }
+
+  /* claims */
+  .claims { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
+  .claims article {
+    border-left: 3px solid #ff5a1f;
+    padding: 8px 8px 8px 16px;
+  }
+  .claims h2 {
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .claims p { margin: 0; color: #b1a89c; font-size: 16px; line-height: 1.4; }
+
+  /* team */
+  .names { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+  .names article {
+    background: #111318;
+    border: 1px solid rgba(243, 236, 224, 0.14);
+    border-radius: 16px;
+    min-height: 2.15in;
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .names i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff5a1f;
+    display: block;
+    margin-bottom: auto;
+    box-shadow: 0 0 12px rgba(255, 90, 31, 0.8);
+  }
+  .names strong {
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .team-links { margin-top: 26px; font-size: 18px; color: #f4efe6; }
+  .team-links span { color: #8d867c; }
+</style>
+</head>
+<body>
+  <section class="slide">
+    <div class="mark"></div>
+    <div class="pad">
+      <p class="kicker">NASA Space Apps 2026</p>
+      <div class="title-wrap">
+        <h1>FlameGuard</h1>
+        <p class="dek">Partial-gravity fire intelligence for human spaceflight.</p>
+        <div class="meta">
+          <div><span>Challenge</span>Flame in Freefall</div>
+          <div><span>Team</span>National Chung Cheng University</div>
+          <div><span>Live app</span>flameguard-gray.vercel.app</div>
+        </div>
+      </div>
+      <div class="foot"><span>01 / 07</span><span>Measured numbers are cited. Screening math is labeled.</span></div>
+    </div>
+  </section>
+
+  <section class="slide problem">
+    <div class="pad">
+      <p class="kicker">The problem</p>
+      <h1>1 g is not the worst published case.</h1>
+      <div class="cards">
+          <div class="card">
+            <strong>NASA-STD-6001 Test 1</strong>
+            <p>An upward burn at Earth gravity. A material fails if it burns more than 15 cm. Programs use this pass.</p>
+          </div>
+          <div class="card">
+            <strong>Olson &amp; Ferkul, Table I</strong>
+            <p>Nomex, Ultem, and Mylar reach a lower limiting oxygen at lunar or Martian gravity than at 1 g.</p>
+          </div>
+          <div class="card">
+            <strong>The empty cell</strong>
+            <p>Saffire-VI flew a large fire near 34% oxygen and 8.2 psia only in microgravity. That atmosphere at lunar or Martian gravity and vehicle scale has not been flown.</p>
+          </div>
+      </div>
+      <div class="foot"><span>02 / 07</span><span>AIAA 2012-3492 · NTRS 20240002981</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="pad">
+      <p class="kicker">The solution</p>
+      <h1 style="font-size:54px">One cabin. Four readings.</h1>
+      <div class="four">
+        <article>
+          <em>01</em>
+          <h2>Mission</h2>
+          <p>Summarizes the cabin against the published limiting oxygen for the witness on the desk.</p>
+        </article>
+        <article>
+          <em>02</em>
+          <h2>Atlas</h2>
+          <p>Ranks the investigations for that cabin: gravity, atmosphere, and the hazard that is loudest.</p>
+        </article>
+        <article>
+          <em>03</em>
+          <h2>Ember</h2>
+          <p>Answers a question only from cited rows. No outside language model, so it cannot invent a flight number.</p>
+        </article>
+        <article>
+          <em>04</em>
+          <h2>Brief</h2>
+          <p>Prints the same state: limit, detection, suppression, spread, the open cell, and the method.</p>
+        </article>
+      </div>
+      <p class="note">Screening math is labeled. Measured numbers stay cited.</p>
+      <div class="foot"><span>03 / 07</span><span>flameguard-gray.vercel.app</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="pad">
+      <p class="kicker">NASA data</p>
+      <h1 style="font-size:52px">The record the ranking is built on.</h1>
+      <div class="cols">
+        <section>
+          <h2>Partial gravity</h2>
+          <ul>
+            <li>Olson &amp; Ferkul 2012, Table I. The only table here with the same materials at lunar, Martian, forced-flow microgravity, and 1 g.</li>
+            <li>Nomex at 14.7 psia. Ultem and Mylar at 10.2 psia. Low-g values are about a five-second drop.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Microgravity flights</h2>
+          <ul>
+            <li>Saffire I–VI and BASS for spread and scale.</li>
+            <li>SAME for smoke particle size. FLEX for cool flames.</li>
+            <li>ACME Burning Rate Emulator: 59 ISS tests of gaseous flames standing in for solids. Not a material limit.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="banner"><b>FM2</b> is shown as a planned lunar payload, not a finished table. It aims at the empty cell and has not delivered it.</div>
+      <div class="foot"><span>04 / 07</span><span>PSI · NTRS · OCHMO-TB-008</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="pad">
+      <p class="kicker">Result · lunar cabin, 34% oxygen, 8.2 psia</p>
+      <div class="hero-num">
+        <strong>13.0</strong>
+        <p>Nomex at 34.0% oxygen is 13.0 points above its lunar ULOI* of 21.0%. That limit was measured at 14.7 psia. The page does not invent a pressure correction.</p>
+      </div>
+      <div class="trio">
+        <div>
+          <b>Nomex 19.9%</b>
+          <span>Lowest published ULOI* is Martian, not lunar and not free fall.</span>
+        </div>
+        <div>
+          <b>Mylar 15.6%</b>
+          <span>Lowest published ULOI* is lunar gravity.</span>
+        </div>
+        <div>
+          <b>Ultem 24.0%</b>
+          <span>Free-fall ULOI* is higher than its 1 g value of 23.5%. The penalty is partial gravity.</span>
+        </div>
+      </div>
+      <p class="split-line">Same witness, Nomex. The largest limit overrun is Mars surface. The highest exposure index is deep-space transit.</p>
+      <table class="cabins">
+        <thead>
+          <tr><th>Mission</th><th>Against the limit</th><th>Index</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ISS cabin</td><td>1.0 under MOC*</td><td>35 · Guarded</td></tr>
+          <tr><td>ISS pre-EVA</td><td>7.0 above ULOI*</td><td>61 · Elevated</td></tr>
+          <tr class="loud"><td>Deep-space transit</td><td>11.0 above ULOI*</td><td>73 · Severe</td></tr>
+          <tr><td>Lunar surface</td><td>13.0 above ULOI*</td><td>68 · Severe</td></tr>
+          <tr class="loud"><td>Mars surface</td><td>14.1 above ULOI*</td><td>68 · Severe</td></tr>
+          <tr><td>Test 1 bench</td><td>10.5 above ULOI*</td><td>57 · Elevated</td></tr>
+        </tbody>
+      </table>
+      <div class="foot"><span>05 / 07</span><span>Olson &amp; Ferkul, Table I</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="pad">
+      <p class="kicker">What it does not claim</p>
+      <h1 style="font-size:52px">A comparison. Not a certification.</h1>
+      <div class="claims">
+        <article>
+          <h2>Not a fire probability</h2>
+          <p>The exposure index compares cabins. It does not say how likely a fire is, and it does not replace NASA-STD-6001.</p>
+        </article>
+        <article>
+          <h2>Not the Test 1 burn</h2>
+          <p>Drop-tower limits used about five seconds. Test 1 fails a material that burns more than 15 cm. The criteria are different.</p>
+        </article>
+        <article>
+          <h2>No invented pressure correction</h2>
+          <p>When the cabin pressure differs from the witness test, mole fraction is compared directly and the offset is stated.</p>
+        </article>
+        <article>
+          <h2>No invented limits</h2>
+          <p>Catalog materials without a published row — SIBAL, cotton, PMMA, silicone, beta cloth — are not given a limiting oxygen.</p>
+        </article>
+      </div>
+      <div class="foot"><span>06 / 07</span><span>Not a NASA product</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="pad">
+      <p class="kicker">National Chung Cheng University</p>
+      <h1 style="font-size:52px">Built together.</h1>
+      <div class="names">
+        <article><i></i><strong>Ayush Kumar</strong></article>
+        <article><i></i><strong>Naisha Eshwar Shelke</strong></article>
+        <article><i></i><strong>Chandana Virupaksha</strong></article>
+      </div>
+      <p class="team-links">Code <span>https://github.com/aykumar21/FlameGuard</span><br />App <span>https://flameguard-gray.vercel.app/</span></p>
+      <div class="foot"><span>07 / 07</span><span>Independent Space Apps project. Not a flight certification.</span></div>
+    </div>
+  </section>
+</body>
+</html>
